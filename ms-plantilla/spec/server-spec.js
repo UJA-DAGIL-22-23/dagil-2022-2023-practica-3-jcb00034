@@ -16,55 +16,75 @@ const app = require('../server');
  * Test para las rutas "estáticas": / y /acerdade
  */
 describe('Servidor PLANTILLA:', () => {
-  describe('Rutas / y /acercade', () => {
-    it('Devuelve MS Plantilla Home Page', (done) => {
-      supertest(app)
-        .get('/')
-        .expect(200)
-        .expect('Content-Type', /json/)
-        .expect(function (res) {
-          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.hasOwnProperty('mensaje'));
-          assert(res.body.mensaje === "Microservicio MS Plantilla: home");
+    describe('Rutas / y /acercade', () => {
+        it('Devuelve MS Plantilla Home Page', (done) => {
+            supertest(app)
+                .get('/')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+                    assert(res.body.hasOwnProperty('mensaje'));
+                    assert(res.body.mensaje === "Microservicio MS Plantilla: home");
 
-        })
-        .end((error) => { error ? done.fail(error) : done() })
-    });
-    it('Devuelve MS Plantilla Acerca De', (done) => {
-      supertest(app)
-        .get('/acercade')
-        .expect(200)
-        .expect('Content-Type', /json/)
-        .expect(function (res) {
-          //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.hasOwnProperty('mensaje'));
-          assert(res.body.mensaje === "Microservicio MS Plantilla: acerca de");
+                })
+                .end((error) => {
+                    error ? done.fail(error) : done()
+                })
+        });
+        it('Devuelve MS Plantilla Acerca De', (done) => {
+            supertest(app)
+                .get('/acercade')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
+                    assert(res.body.hasOwnProperty('mensaje'));
+                    assert(res.body.mensaje === "Microservicio MS Plantilla: acerca de");
 
-        })
-        .end((error) => { error ? done.fail(error) : done() })
-    });
-  })
+                })
+                .end((error) => {
+                    error ? done.fail(error) : done()
+                })
+        });
+    })
 
-  /**
-   * Tests para acceso a la BBDD
-   */
-  describe('Acceso a BBDD:', () => {
-    it('Devuelve ¿¿¿ VALOR ESPERADO ??? al consultar mediante test_db', (done) => {
-      supertest(app)
-        .get('/test_db')
-        .expect(200)
-        .expect('Content-Type', /json/)
-        .expect(function (res) {
-          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.data[0].data.hasOwnProperty('¿¿¿ PROPIEDAD ???'));
-          assert(res.body.data[0].data.nombre === "¿¿¿ VALOR ESPERADO ???");
+    /**
+     * Tests para acceso a la BBDD
+     */
+    describe('Acceso a BBDD:', () => {
+        it('Devuelve ¿¿¿ VALOR ESPERADO ??? al consultar mediante test_db', (done) => {
+            supertest(app)
+                .get('/test_db')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+                    assert(res.body.data.length === 10);
 
-        })
-        .end((error) => { error ? done.fail(error) : done(); }
-        );
-    });
+                })
+                .end((error) => {
+                        error ? done.fail(error) : done();
+                    }
+                );
+        });
 
-  })
+        it('Devuelve un vector de tamaño 10 al consultar mediante getTodas', (done) => {
+            supertest(app)
+                .get('/getTodas')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    // console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+                    assert(res.body.data.length === 10);
+                })
+                .end((error) => {
+                        error ? done.fail(error) : done();
+                    }
+                );
+        });
+
+    })
 });
 
 

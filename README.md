@@ -659,3 +659,9 @@ Décimo documento
   retirado: false
 }
 ```
+
+### Primer incremento
+Para el primer incremento se han elegido las historias de usuario 1,2,4.
+
+#### Tablero Trello al iniciar el incremento
+![trello_inc_1](./assets/img/trello-inc-1.png)

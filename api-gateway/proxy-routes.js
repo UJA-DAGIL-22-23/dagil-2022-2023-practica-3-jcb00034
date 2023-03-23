@@ -16,7 +16,17 @@ const ROUTES = [
                 [`^/plantilla`]: '',
             },
         }
-    }
+    },
+    {
+        url: '/deportistas',
+        proxy: {
+            target: "http://localhost:8003",
+            changeOrigin: true,
+            pathRewrite: {
+                [`^/deportistas`]: '',
+            },
+        }
+    },
 ]
 
 exports.routes = ROUTES;
