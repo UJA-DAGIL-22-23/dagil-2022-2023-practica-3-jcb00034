@@ -19,13 +19,15 @@ Deportistas.plantillaTags = {
     "MEDALLASBRONCE": "### MEDALLAS DE BRONCE ###",
     "RETIRADO": "### RETIRADO ###"
 }
+Deportistas.DatosNulos = `<h4>No se ha podido acceder correctamente a los datos</h4>`
 
 /// Plantilla para poner los datos de varias personas dentro de una tabla
-Deportistas.plantillaTablaPersonas = {}
+Deportistas.plantillaTablaPersonasDatos = {}
+Deportistas.plantillaTablaPersonasNombres = {}
 
 
 // Cabecera de la tabla
-Deportistas.plantillaTablaPersonas.cabecera = `<table width="100%" class="listado-personas">
+Deportistas.plantillaTablaPersonasDatos.cabecera = `<table width="100%" class="listado-personas">
                     <thead>
                         <th width="10%">ID</th>
                         <th width="15%">Nombre</th>
@@ -41,8 +43,16 @@ Deportistas.plantillaTablaPersonas.cabecera = `<table width="100%" class="listad
                     <tbody>
     `;
 
+Deportistas.plantillaTablaPersonasNombres.cabecera = `<table width="100%" class="listado-personas">
+                    <thead>
+                        <th width="10%">ID</th>
+                        <th width="15%">Nombre</th>
+                    </thead>
+                    <tbody>
+    `;
+
 // Elemento TR que muestra los datos de una persona
-Deportistas.plantillaTablaPersonas.cuerpo = `
+Deportistas.plantillaTablaPersonasDatos.cuerpo = `
     <tr title="${Deportistas.plantillaTags.ID}">
         <td>${Deportistas.plantillaTags.ID}</td>
         <td>${Deportistas.plantillaTags.NOMBRE}</td>
@@ -57,13 +67,15 @@ Deportistas.plantillaTablaPersonas.cuerpo = `
     </tr>
     `;
 
+Deportistas.plantillaTablaPersonasNombres.cuerpo = `
+    <tr title="${Deportistas.plantillaTags.ID}">
+        <td>${Deportistas.plantillaTags.ID}</td>
+        <td>${Deportistas.plantillaTags.NOMBRE}</td>
+    </tr>
+    `;
+
 // Pie de la tabla
-Deportistas.plantillaTablaPersonas.pie = `        </tbody>
-             </table>
-             `;
-
-
-
+Deportistas.plantillaTablaPersonasDatos.pie = `</tbody></table>`;
 
 /**
  * Actualiza el cuerpo de la plantilla deseada con los datos de la deportista que se le pasa
@@ -71,7 +83,7 @@ Deportistas.plantillaTablaPersonas.pie = `        </tbody>
  * @param {Persona} Persona Objeto con los datos de la deportista que queremos escribir en el TR
  * @returns La plantilla del cuerpo de la tabla con los datos actualizados
  */
-Deportistas.sustituyeTags = function (plantilla, deportista) {
+Deportistas.sustituyeTagsDatos = function (plantilla, deportista) {
     return plantilla
         .replace(new RegExp(Deportistas.plantillaTags.ID, 'g'), deportista.ref['@ref'].id)
         .replace(new RegExp(Deportistas.plantillaTags.NOMBRE, 'g'), deportista.data.nombre)
@@ -85,13 +97,23 @@ Deportistas.sustituyeTags = function (plantilla, deportista) {
         .replace(new RegExp(Deportistas.plantillaTags.RETIRADO, 'g'), deportista.data.retirado)
 }
 
+Deportistas.sustituyeTagsNombre = function (plantilla, deportista) {
+    return plantilla
+        .replace(new RegExp(Deportistas.plantillaTags.ID, 'g'), deportista.ref['@ref'].id)
+        .replace(new RegExp(Deportistas.plantillaTags.NOMBRE, 'g'), deportista.data.nombre)
+}
+
 /**
  * Actualiza el cuerpo de la tabla con los datos de la persona que se le pasa
  * @param {Deportista} Deportista Objeto con los datos de la persona que queremos escribir en el TR
  * @returns La plantilla del cuerpo de la tabla con los datos actualizados
  */
-Deportistas.plantillaTablaPersonas.actualiza = function (deportista) {
-    return Deportistas.sustituyeTags(this.cuerpo, deportista)
+Deportistas.plantillaTablaPersonasDatos.actualiza = function (deportista) {
+    return Deportistas.sustituyeTagsDatos(this.cuerpo, deportista)
+}
+
+Deportistas.plantillaTablaPersonasNombres.actualiza = function (deportista) {
+    return Deportistas.sustituyeTagsNombre(this.cuerpo, deportista)
 }
 
 
@@ -100,23 +122,47 @@ Deportistas.plantillaTablaPersonas.actualiza = function (deportista) {
  * @param {Vector_de_personas} vector Vector con los datos de las personas a mostrar
  */
 
-Deportistas.imprimeMuchasPersonas = function (vector) {
+Deportistas.imprimeNombreMuchasPersonas = function (vector) {
     // console.log(vector) // Para comprobar lo que hay en vector
 
     // Compongo el contenido que se va a mostrar dentro de la tabla
-    let msj = Deportistas.plantillaTablaPersonas.cabecera
-    vector.forEach(e => msj += Deportistas.plantillaTablaPersonas.actualiza(e))
-    msj += Deportistas.plantillaTablaPersonas.pie
-
+    let msj="";
+    if(vector !== null) {
+        msj = Deportistas.plantillaTablaPersonasNombres.cabecera
+        vector.forEach(e => msj += Deportistas.plantillaTablaPersonasNombres.actualiza(e))
+        msj += Deportistas.plantillaTablaPersonasDatos.pie
+    }else{
+        msj+=Deportistas.DatosNulos
+    }
     // Borro toda la info de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Listado de personas", msj)
+    Frontend.Article.actualizar("Listado de datos de deportistas", msj)
+}
+
+Deportistas.imprimeDatosMuchasPersonas = function (vector) {
+    // console.log(vector) // Para comprobar lo que hay en vector
+
+    // Compongo el contenido que se va a mostrar dentro de la tabla
+    let msj="";
+    if(vector !== null) {
+        msj = Deportistas.plantillaTablaPersonasDatos.cabecera
+        vector.forEach(e => msj += Deportistas.plantillaTablaPersonasDatos.actualiza(e))
+        msj += Deportistas.plantillaTablaPersonasDatos.pie
+    }else{
+        msj+=Deportistas.DatosNulos
+    }
+    // Borro toda la info de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizar("Listado de nombres de deportistas", msj)
 }
 
 /**
  * Función principal para recuperar las personas desde el MS y, posteriormente, imprimirlas.
  */
-Deportistas.listar = function () {
-    Deportistas.recupera(Deportistas.imprimeMuchasPersonas);
+Deportistas.listarDatos = function () {
+    Deportistas.recupera(Deportistas.imprimeDatosMuchasPersonas);
+}
+
+Deportistas.listarNombres = function () {
+    Deportistas.recupera(Deportistas.imprimeNombreMuchasPersonas);
 }
 
 Deportistas.recupera = async function (callBackFn) {
@@ -133,7 +179,7 @@ Deportistas.recupera = async function (callBackFn) {
         //throw error
     }
 
-    // Muestro todas las persoans que se han descargado
+    // Muestro todas las personas que se han descargado
     let vectorPersonas = null
     if (response) {
         vectorPersonas = await response.json()

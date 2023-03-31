@@ -7,6 +7,7 @@
 
 "use strict";
 
+
 /// Creo el espacio de nombres
 let Plantilla = {};
 
@@ -17,7 +18,6 @@ Plantilla.datosDescargadosNulos = {
     email: "",
     fecha: ""
 }
-
 
 /**
  * Función que descarga la info MS Plantilla al llamar a una de sus rutas
@@ -93,6 +93,7 @@ Plantilla.mostrarAcercaDe = function (datosDescargados) {
 }
 
 
+
 /**
  * Función principal para responder al evento de elegir la opción "Home"
  */
@@ -106,6 +107,7 @@ Plantilla.procesarHome = function () {
 Plantilla.procesarAcercaDe = function () {
     this.descargarRuta("/plantilla/acercade", this.mostrarAcercaDe);
 }
+
 
 
 

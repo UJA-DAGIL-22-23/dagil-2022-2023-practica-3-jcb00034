@@ -19,15 +19,17 @@
 </head>
 
 <body>
-    <h1>Aplicación Microservicios Plantilla</h1>
+    <h1>Aplicación Microservicios Remo</h1>
     <!-- Barra de navegación de la aplicación -->
     <nav>
         <a href="javascript:Plantilla.procesarHome()" class="opcion-principal"
             title="Llama a la ruta / del MS Plantilla">Home</a>
         <a href="javascript:Plantilla.procesarAcercaDe()" class="opcion-principal"
             title="Llama a la ruta /acercade del MS Plantilla">Acerca de</a>
-        <a href="javascript:Deportistas.listar()" class="opcion-principal mostrar"
-           title="Realiza un listado de todos los deportistas que hay en la BBDD">Listar Deportistas</a>
+        <a href="javascript:Deportistas.listarNombres()" class="opcion-principal mostrar"
+           title="Realiza un listado de los nombres de todos los deportistas que hay en la BBDD">Listar nombres Deportistas</a>
+        <a href="javascript:Deportistas.listarDatos()" class="opcion-principal mostrar"
+           title="Realiza un listado de todos los deportistas que hay en la BBDD">Listar datos Deportistas</a>
 
     </nav>
 
@@ -59,6 +61,7 @@
     <!-- Cargamos ficheros spec con los tests -->
     <script src="js/front-end-spec.js"></script>
     <script src="js/ms-plantilla-spec.js"></script>
+    <script src="js/deportistas-spec.js"></script>
 
 </body>
 

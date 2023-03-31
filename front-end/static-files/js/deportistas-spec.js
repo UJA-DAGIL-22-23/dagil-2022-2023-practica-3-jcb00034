@@ -1,48 +1,43 @@
 // SPECS para Jasmine
-describe("Pie table ", function () {
+describe("Deportistas.Pietable ", function () {
     it("debería devolver las etiquetas HTML para el pie de tabla",
         function () {
-            expect(Deportistas.plantillaTablaPersonas.pie()).toBe("</tbody></table>");
+            expect(Deportistas.plantillaTablaPersonasDatos.pie).toBe("</tbody></table>");
         });
 });
 
-describe("cuerpoConDeportistasTr ", function () {
+describe("Deportistas.cuerpoConDeportistasTr ", function () {
     // Preparo los datos
     let d = {
-        id:"ref deportista",
-        nombre: "nombre deportista",
-        edad:"Edad deportista",
-        campeonatosMundo:"Campeonatos del mundo",
-        participacionesJJOO:"Participaciones en JJOO",
-        pais:"Pais deportista",
-        ciudad:"Ciudad deportista",
-        altura:"Altura deportista",
-        sexo:"Sexo deportista",
-        medallasOro:"medallas de oro deportista",
-        medallasPlata:"medallas de plata deportista",
-        medallasBronce:"medallas de bronce deportista",
-        retirado:"Estado deportista"
+        ID:"### ID ###",
+        NOMBRE: "### NOMBRE ###",
+        EDAD: "### EDAD ###",
+        CAMPEONATOSMUNDO: "### CAMPEONATOS DEL MUNDO ###",
+        PARTICIPACIONESJJOO:"### PARTICIPACIONES JJOO ###",
+        PAIS:"### PAIS ###",
+        CIUDAD:"### CIUDAD ###",
+        ALTURA:"### ALTURA ###",
+        SEXO: "### SEXO ###",
+        MEDALLASORO: "### MEDALAS DE ORO ###",
+        MEDALLASPLATA: "### MEDALLAS DE PLATA ###",
+        MEDALLASBRONCE: "### MEDALLAS DE BRONCE ###",
+        RETIRADO: "### RETIRADO ###"
     }
 
-    let p = { data: d }
-
     // Realizo los expect
-    it("debería devolver una fila de tabla con los datos de un proyecto con personas asociadas",
+    it("debería devolver una fila de tabla con los datos de los deportistas",
         function () {
-            let msj = Deportistas.plantillaTablaPersonas.cuerpo(p)
-            expect(msj.includes(d.id)).toBeTrue();
-            expect(msj.includes(d.nombre)).toBeTrue();
-            expect(msj.includes(d.edad)).toBeTrue();
-            expect(msj.includes(d.pais)).toBeTrue();
-            expect(msj.includes(d.altura)).toBeTrue();
-            expect(msj.includes(d.campeonatosMundo)).toBeTrue();
-            expect(msj.includes(d.ciudad)).toBeTrue();
-            expect(msj.includes(d.participacionesJJOO)).toBeTrue();
-            expect(msj.includes(d.medallasBronce)).toBeTrue();
-            expect(msj.includes(d.medallasPlata)).toBeTrue();
-            expect(msj.includes(d.medallasOro)).toBeTrue();
-            expect(msj.includes(d.sexo)).toBeTrue();
-            expect(msj.includes(d.retirado)).toBeTrue();
+            let msj = Deportistas.plantillaTablaPersonasDatos.cuerpo
+            expect(msj.includes(d.ID)).toBeTrue();
+            expect(msj.includes(d.EDAD)).toBeTrue();
+            expect(msj.includes(d.SEXO)).toBeTrue();
+            expect(msj.includes(d.PAIS)).toBeTrue();
+            expect(msj.includes(d.ALTURA)).toBeTrue();
+            expect(msj.includes(d.CAMPEONATOSMUNDO)).toBeTrue();
+            expect(msj.includes(d.CIUDAD)).toBeTrue();
+            expect(msj.includes(d.NOMBRE)).toBeTrue();
+            expect(msj.includes(d.PARTICIPACIONESJJOO)).toBeTrue();
+            expect(msj.includes(d.RETIRADO)).toBeTrue();
 
         });
 });
