@@ -135,7 +135,7 @@ Deportistas.imprimeNombreMuchasPersonas = function (vector) {
         msj+=Deportistas.DatosNulos
     }
     // Borro toda la info de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Listado de datos de deportistas", msj)
+    Frontend.Article.actualizar("Listado de nombres de deportistas", msj)
 }
 
 Deportistas.imprimeDatosMuchasPersonas = function (vector) {
@@ -151,7 +151,7 @@ Deportistas.imprimeDatosMuchasPersonas = function (vector) {
         msj+=Deportistas.DatosNulos
     }
     // Borro toda la info de Article y la sustituyo por la que me interesa
-    Frontend.Article.actualizar("Listado de nombres de deportistas", msj)
+    Frontend.Article.actualizar("Listado de datos de deportistas", msj)
 }
 
 /**
