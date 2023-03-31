@@ -9,7 +9,7 @@
 https://trello.com/b/QIs0WzuA/pr%C3%A1ctica-3-remo
 ## Capturas de pantalla sobre fauna
 ### Home
-![home_fauna](./assets/img/home_fauna.png)
+![home_fauna](./assets/img/home_fauna.PNG)
 ### Base de datos
 ![bbdd_fauna](./assets/img/bbdd_fauna.png)
 ### Colección
@@ -243,3 +243,7 @@ Para el primer incremento se han elegido las historias de usuario 1,2,4.
 ![trello_fin_incr1](./assets/icr1/trello-fin-incr1.PNG)
 
 Como se puede apreciar, este incremento se ha podido completar según lo planificado inicialmente y sin ningún imprevisto.
+### Segundo incremento
+Las historias de usuario escogidas para este segundo incremento son la 3, la 16 y la 17
+#### Tablero Trello al iniciar el incremento
+![trello_inc_2](./assets/icr2/Trello-inc2.PNG)

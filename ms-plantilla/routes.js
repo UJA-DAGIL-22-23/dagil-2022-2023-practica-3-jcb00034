@@ -57,5 +57,13 @@ router.get("/getTodas", async (req, res) => {
     }
 });
 
+router.get("/borrarDeportista", async (req, res) => {
+    try {
+        await callbacks.borrarDeportista(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // Exporto el módulo para poder usarlo en server
 module.exports = router;

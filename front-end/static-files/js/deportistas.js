@@ -27,7 +27,16 @@ Deportistas.plantillaTablaPersonasNombres = {}
 
 
 // Cabecera de la tabla
-Deportistas.plantillaTablaPersonasDatos.cabecera = `<table width="100%" class="listado-personas">
+Deportistas.plantillaTablaPersonasDatos.cabecera = `
+                    <div>
+                        <a href="javascript:Deportistas.OrdenarAlfabeticamenteD()" class="opcion-principal mostrar">
+                            Ordenar alfabéticamente
+                        </a>
+                        <a href="javascript:Deportistas.listarNombres()" class="opcion-principal mostrar">
+                            listar Nombres
+                        </a>
+                    </div>
+                    <table width="100%" class="listado-personas">
                     <thead>
                         <th width="10%">ID</th>
                         <th width="15%">Nombre</th>
@@ -43,7 +52,16 @@ Deportistas.plantillaTablaPersonasDatos.cabecera = `<table width="100%" class="l
                     <tbody>
     `;
 
-Deportistas.plantillaTablaPersonasNombres.cabecera = `<table width="100%" class="listado-personas">
+Deportistas.plantillaTablaPersonasNombres.cabecera = `
+                    <div>
+                        <a href="javascript:Deportistas.OrdenarAlfabeticamenteN()" class="opcion-principal mostrar">
+                            Ordenar alfabéticamente
+                        </a>
+                        <a href="javascript:Deportistas.listarDatos()" class="opcion-principal mostrar">
+                            listar Datos
+                        </a>
+                    </div>
+                    <table width="100%" class="listado-personas">
                     <thead>
                         <th width="10%">ID</th>
                         <th width="15%">Nombre</th>
@@ -76,6 +94,34 @@ Deportistas.plantillaTablaPersonasNombres.cuerpo = `
 
 // Pie de la tabla
 Deportistas.plantillaTablaPersonasDatos.pie = `</tbody></table>`;
+
+Deportistas.comparaNombre = function(a,b){
+    if(a.data.nombre > b.data.nombre){
+        return 1;
+    }
+    if(a.data.nombre < b.data.nombre){
+        return -1;
+    }
+
+    return 0;
+}
+Deportistas.OrdenarNombres = function(vector){
+    Deportistas.imprimeNombreMuchasPersonas(vector.sort(Deportistas.comparaNombre))
+}
+
+Deportistas.OrdenarDatos = function(vector){
+    Deportistas.imprimeDatosMuchasPersonas(vector.sort(Deportistas.comparaNombre))
+}
+
+Deportistas.OrdenarAlfabeticamenteN = function(){
+    Deportistas.recupera(Deportistas.OrdenarNombres)
+
+}
+
+Deportistas.OrdenarAlfabeticamenteD = function(){
+    Deportistas.recupera(Deportistas.OrdenarDatos)
+
+}
 
 /**
  * Actualiza el cuerpo de la plantilla deseada con los datos de la deportista que se le pasa

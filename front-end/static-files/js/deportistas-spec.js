@@ -39,6 +39,8 @@ describe("Deportistas.cuerpoConDeportistasTr ", function () {
             expect(msj.includes(d.PARTICIPACIONESJJOO)).toBeTrue();
             expect(msj.includes(d.RETIRADO)).toBeTrue();
 
+
+
         });
 
     it("debería devolver una fila de tabla con los nombres e id de los deportistas",
@@ -46,5 +48,42 @@ describe("Deportistas.cuerpoConDeportistasTr ", function () {
             let msj = Deportistas.plantillaTablaPersonasNombres.cuerpo
             expect(msj.includes(d.ID)).toBeTrue();
             expect(msj.includes(d.NOMBRE)).toBeTrue();
+        });
+});
+
+describe("Deportistas.Ordenar",function(){
+    let d1 = {
+        data:{
+            nombre:"Manuel"
+        }
+    }
+    let d2 = {
+        data:{
+            nombre:"José"
+        }
+    }
+
+
+
+   it("Comprobación d1 < d2",
+       function(){
+           let vector = [d1,d2]
+           vector.sort(Deportistas.comparaNombre)
+           expect(vector[0].data.nombre).toBe(d2.data.nombre);
+           expect(vector[1].data.nombre).toBe(d1.data.nombre);
+       });
+    it("Comprobación d1 > d2",
+        function(){
+            let vector = [d2,d1]
+            vector.sort(Deportistas.comparaNombre)
+            expect(vector[0].data.nombre).toBe(d2.data.nombre);
+            expect(vector[1].data.nombre).toBe(d1.data.nombre);
+        });
+    it("Comprobación d1 = d2",
+        function(){
+            let vector = [d1,d1]
+            vector.sort(Deportistas.comparaNombre)
+            expect(vector[0].data.nombre).toBe(d1.data.nombre);
+            expect(vector[1].data.nombre).toBe(d1.data.nombre);
         });
 });

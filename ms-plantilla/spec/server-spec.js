@@ -83,6 +83,21 @@ describe('Servidor PLANTILLA:', () => {
                     }
                 );
         });
+        it('Elimina una persona de la bbdd', (done) => {
+            supertest(app)
+                .delete('/borrarDeportista')
+                .send('359810597258264780')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+                    assert(res.body.data.length === 10);
+                })
+                .end((error) => {
+                        error ? done.fail(error) : done();
+                    }
+                );
+        });
 
     })
 });

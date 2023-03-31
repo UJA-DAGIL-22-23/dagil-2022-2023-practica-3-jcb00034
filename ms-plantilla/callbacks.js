@@ -25,7 +25,7 @@ const COLLECTION = "Practica3-DB"
  * Función que permite servir llamadas sin importar el origen:
  * CORS significa Cross-Origin Resource Sharing
  * Dado un objeto de tipo respuesta, le añade las cabeceras necesarias para realizar CROS
- * @param {*} res Objeto de tipo response 
+ * @param {*} res Objeto de tipo response
  * @returns Devuelve el mismo objeto para concatenar varias llamadas al mismo
  */
 function CORS(res) {
@@ -44,7 +44,7 @@ function CORS(res) {
 const CB_MODEL_SELECTS = {
     /**
      * Prueba de conexión a la BBDD: devuelve todas las personas que haya en la BBDD.
-     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
     test_db: async (req, res) => {
@@ -57,7 +57,7 @@ const CB_MODEL_SELECTS = {
             )
             res.status(200).json(personas)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            res.status(500).json({error: error.description})
         }
     },
     /**
@@ -78,11 +78,26 @@ const CB_MODEL_SELECTS = {
                 .status(200)
                 .json(personas)
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
+    borrarDeportista: async (req, res) => {
+        //console.log("setTodo req.body", req) // req.body contiene todos los parámetros de la llamada
+        try {
+            let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
+            await client.query(
+                q.Delete(
+                    q.Ref(q.Collection(COLLECTION), data)
+                )
+            )
+            CORS(res)
+                .status(200)
+                .json(data)
+        } catch (error) {
+            CORS(res).status(500).json({error: error.description})
+        }
+    }
 }
-
 
 
 // CALLBACKS ADICIONALES
@@ -93,20 +108,20 @@ const CB_MODEL_SELECTS = {
 const CB_OTHERS = {
     /**
      * Devuelve un mensaje indicando que se ha accedido a la home del microservicio
-     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
     home: async (req, res) => {
         try {
-            CORS(res).status(200).json({ mensaje: "Microservicio MS Plantilla: home" });
+            CORS(res).status(200).json({mensaje: "Microservicio MS Plantilla: home"});
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
 
     /**
      * Devuelve un mensaje indicando que se ha accedido a la información Acerca De del microservicio
-     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
      * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
      */
     acercaDe: async (req, res) => {
@@ -118,7 +133,7 @@ const CB_OTHERS = {
                 fecha: "22/03/2023"
             });
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
     },
 
@@ -127,4 +142,4 @@ const CB_OTHERS = {
 // Une todos los callbacks en un solo objeto para poder exportarlos.
 // MUY IMPORTANTE: No debe haber callbacks con el mismo nombre en los distintos objetos, porque si no
 //                 el último que haya SOBREESCRIBE a todos los anteriores.
-exports.callbacks = { ...CB_MODEL_SELECTS, ...CB_OTHERS }
+exports.callbacks = {...CB_MODEL_SELECTS, ...CB_OTHERS}
