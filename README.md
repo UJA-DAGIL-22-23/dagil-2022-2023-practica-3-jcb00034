@@ -229,7 +229,7 @@ Décimo documento
 Para el primer incremento se han elegido las historias de usuario 1,2,4.
 
 #### Tablero Trello al iniciar el incremento
-![trello_inc_1](./assets/icr1/trello-inc-1.png)
+![trello_inc_1](./assets/icr1/trello-inc-1.PNG)
 
 #### Funcionalidades implementadas
 ##### HU_1
