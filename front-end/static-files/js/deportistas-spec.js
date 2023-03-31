@@ -40,4 +40,11 @@ describe("Deportistas.cuerpoConDeportistasTr ", function () {
             expect(msj.includes(d.RETIRADO)).toBeTrue();
 
         });
+
+    it("debería devolver una fila de tabla con los nombres e id de los deportistas",
+        function () {
+            let msj = Deportistas.plantillaTablaPersonasNombres.cuerpo
+            expect(msj.includes(d.ID)).toBeTrue();
+            expect(msj.includes(d.NOMBRE)).toBeTrue();
+        });
 });
