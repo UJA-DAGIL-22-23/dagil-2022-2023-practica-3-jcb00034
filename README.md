@@ -9,11 +9,11 @@
 https://trello.com/b/QIs0WzuA/pr%C3%A1ctica-3-remo
 ## Capturas de pantalla sobre fauna
 ### Home
-![home_fauna](./assets/img/home_fauna.png)
+![home_fauna](./assets/img/home_fauna.PNG)
 ### Base de datos
-![bbdd_fauna](./assets/img/bbdd_fauna.png)
+![bbdd_fauna](./assets/img/bbdd_fauna.PNG)
 ### Colección
-![coleccion_fauna](./assets/img/coleciones_fauna.png)
+![coleccion_fauna](./assets/img/coleciones_fauna.PNG)
 ### Documentos
 Primer documento
 ```{
