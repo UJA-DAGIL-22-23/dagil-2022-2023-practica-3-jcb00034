@@ -16,7 +16,8 @@ https://trello.com/b/QIs0WzuA/pr%C3%A1ctica-3-remo
 ![coleccion_fauna](./assets/img/coleciones_fauna.PNG)
 ### Documentos
 Primer documento
-```{
+```
+{
   nombre: "Steve Redgrave",
   edad: 60,
   reprentacion: "Reino Unido",
