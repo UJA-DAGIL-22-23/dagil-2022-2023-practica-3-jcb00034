@@ -100,8 +100,6 @@ describe('Servidor PLANTILLA:', () => {
                     console.log(res.body)
                     //Comprobamos que se ha añadido el deportista indicado
                     expect(res.body.data.nombre).toBe(d.nombre)
-                    id = res.body.data.id
-                    console.log("el id es:"+res.body)
                 })
                 .end((error) => {
                         error ? done.fail(error) : done();
@@ -112,7 +110,7 @@ describe('Servidor PLANTILLA:', () => {
 
         /*Elimina el último deportista de la bbdd*/
         it('Elimina una persona de la bbdd', (done) => {
-            let url = "/borrarDeportista/361004916492206284"
+            let url = "/borrarDeportista/361004916492206285"
             supertest(app)
                 .get(url)
                 .expect(200)
