@@ -11,6 +11,7 @@
 * @author Víctor M. Rivas Santos <vrivas@ujaen.es>
 * @date 03-Feb-2023
 */
+
 table.listado-personas {
     width: 100%;
     border: 1px solid rgba(0, 0, 100, 0.8);
@@ -30,6 +31,31 @@ table.listado-personas tbody td {
 }
 
 table.listado-personas tbody tr {
+    margin: 3px;
+    height: 2em;
+    background-color: rgba(0, 0, 100, 0.1)
+}
+
+form.listado-personas {
+    width: 50%;
+margin-left: 20em;
+    border: 1px solid rgba(0, 0, 100, 0.8);
+}
+
+form.listado-personas h1{
+    margin: 3px;
+    height: 2.5em;
+    background-color: rgba(0, 0, 300, 0.4);
+    text-transform: uppercase;
+}
+
+form.listado-personas input {
+    padding: 0.5em;
+    text-align: center;
+    width: 98%;
+}
+
+form.listado-personas p {
     margin: 3px;
     height: 2em;
     background-color: rgba(0, 0, 100, 0.1)

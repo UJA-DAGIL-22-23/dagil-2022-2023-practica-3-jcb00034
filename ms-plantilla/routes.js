@@ -56,10 +56,20 @@ router.get("/getTodas", async (req, res) => {
         console.log(error);
     }
 });
-
-router.get("/borrarDeportista", async (req, res) => {
+router.param("id", (req, res, next, id) => {
+    next();
+});
+router.get("/borrarDeportista/:id", async (req, res) => {
     try {
         await callbacks.borrarDeportista(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.post("/crearDeportista", async (req, res) => {
+    try {
+        await callbacks.crearDeportista(req, res)
     } catch (error) {
         console.log(error);
     }

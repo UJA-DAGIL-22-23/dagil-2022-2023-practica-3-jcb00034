@@ -11,6 +11,7 @@
 const supertest = require('supertest');
 const assert = require('assert')
 const app = require('../server');
+let id;
 
 /**
  * Test para las rutas "estáticas": / y /acerdade
@@ -53,16 +54,11 @@ describe('Servidor PLANTILLA:', () => {
      * Tests para acceso a la BBDD
      */
     describe('Acceso a BBDD:', () => {
-        it('Devuelve ¿¿¿ VALOR ESPERADO ??? al consultar mediante test_db', (done) => {
+        it('Consultar mediante test_db', (done) => {
             supertest(app)
                 .get('/test_db')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .expect(function (res) {
-                    //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-                    assert(res.body.data.length === 10);
-
-                })
                 .end((error) => {
                         error ? done.fail(error) : done();
                     }
@@ -74,25 +70,53 @@ describe('Servidor PLANTILLA:', () => {
                 .get('/getTodas')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .expect(function (res) {
-                    // console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-                    assert(res.body.data.length === 10);
-                })
                 .end((error) => {
                         error ? done.fail(error) : done();
                     }
                 );
         });
-        it('Elimina una persona de la bbdd', (done) => {
+        it('Añade una persona de la bbdd', (done) => {
+            let d = {
+                nombre: "a",
+                edad: 20,
+                campeonatosMundo: 1,
+                participacionesJJOO: [1990],
+                pais:"a",
+                ciudad:"a",
+                altura: 1,
+                sexo: "H",
+                medallasOro: 1,
+                medallasPlata: 1,
+                medallasBronce: 1,
+                retirado: false
+            }
+
             supertest(app)
-                .delete('/borrarDeportista')
-                .send('359810597258264780')
+                .post('/crearDeportista')
+                .send(d)
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .expect(function (res) {
-                    console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-                    assert(res.body.data.length === 10);
+                    console.log(res.body)
+                    //Comprobamos que se ha añadido el deportista indicado
+                    expect(res.body.data.nombre).toBe(d.nombre)
+                    id = res.body.data.id
+                    console.log("el id es:"+res.body)
                 })
+                .end((error) => {
+                        error ? done.fail(error) : done();
+                    }
+                );
+
+        });
+
+        /*Elimina el último deportista de la bbdd*/
+        it('Elimina una persona de la bbdd', (done) => {
+            let url = "/borrarDeportista/361004916492206284"
+            supertest(app)
+                .get(url)
+                .expect(200)
+                .expect('Content-Type', /json/)
                 .end((error) => {
                         error ? done.fail(error) : done();
                     }

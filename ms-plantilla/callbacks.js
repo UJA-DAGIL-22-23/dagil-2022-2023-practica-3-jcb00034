@@ -82,19 +82,63 @@ const CB_MODEL_SELECTS = {
         }
     },
     borrarDeportista: async (req, res) => {
-        //console.log("setTodo req.body", req) // req.body contiene todos los parámetros de la llamada
+        try {
+            await client.query(
+                q.Delete(q.Ref(q.Collection(COLLECTION), req.params.id))
+            ).then((ret) => {
+                CORS(res)
+                    .status(200)
+                    .header( 'Content-Type', 'application/json' )
+                    .json(ret)
+            })
+        } catch (error) {
+            CORS(res).status(500).json({error: error.description})
+        }
+    },
+    /**
+     * Método para ocambiar los datos de una persona
+     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL
+     * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
+     */
+
+    crearDeportista: async (req, res) => {
         try {
             let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
             await client.query(
-                q.Delete(
-                    q.Ref(q.Collection(COLLECTION), data)
+                q.Create(
+                    q.Collection(COLLECTION),
+                    {
+                        data: {
+                            nombre: data.nombre,
+                            edad: data.edad,
+                            campeonatosMundo: data.campeonatosmundo,
+                            participacionesJJOO: data.participacionesjjoo,
+                            nacionalidad: [
+                                {
+                                    pais: data.pais,
+                                    ciudad: data.ciudad
+                                }
+                            ],
+                            altura: data.altura,
+                            sexo: data.sexo,
+                            medallasOro: data.medallasOro,
+                            medallasPlata: data.medallasPlata,
+                            medallasBronce: data.medallasBronce,
+                            retirado: data.retirado
+                        },
+                    }
                 )
             )
-            CORS(res)
-                .status(200)
-                .json(data)
+                .then((ret) => {
+                    console.log("Valor devuelto ", ret)
+                    CORS(res)
+                        .status(200)
+                        .header( 'Content-Type', 'application/json' )
+                        .json(ret)
+                })
+
         } catch (error) {
-            CORS(res).status(500).json({error: error.description})
+            CORS(res).status(500).json({ error: error.description })
         }
     }
 }

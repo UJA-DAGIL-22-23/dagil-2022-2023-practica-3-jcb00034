@@ -67,23 +67,49 @@ describe("Deportistas.Ordenar",function(){
 
    it("Comprobación d1 < d2",
        function(){
-           let vector = [d1,d2]
-           vector.sort(Deportistas.comparaNombre)
-           expect(vector[0].data.nombre).toBe(d2.data.nombre);
-           expect(vector[1].data.nombre).toBe(d1.data.nombre);
+           expect(Deportistas.comparaNombre(d1,d2)).toBe(1)
        });
     it("Comprobación d1 > d2",
         function(){
-            let vector = [d2,d1]
-            vector.sort(Deportistas.comparaNombre)
-            expect(vector[0].data.nombre).toBe(d2.data.nombre);
-            expect(vector[1].data.nombre).toBe(d1.data.nombre);
+            expect(Deportistas.comparaNombre(d2,d1)).toBe(-1)
         });
     it("Comprobación d1 = d2",
         function(){
-            let vector = [d1,d1]
-            vector.sort(Deportistas.comparaNombre)
-            expect(vector[0].data.nombre).toBe(d1.data.nombre);
-            expect(vector[1].data.nombre).toBe(d1.data.nombre);
+            expect(Deportistas.comparaNombre(d1,d1)).toBe(0)
         });
 });
+
+describe("Deportistas.formulario",function (){
+    it('Debería contener una fila con cada dato del deportista', function () {
+        let d = {
+            NOMBRE: "nombrePrueba",
+            EDAD: 40,
+            CAMPEONATOSMUNDO: 0,
+            PARTICIPACIONESJJOO:"1990,1994",
+            PAIS:"España",
+            CIUDAD:"Madrid",
+            ALTURA:1.94,
+            SEXO: "H",
+            MEDALLASORO: 0,
+            MEDALLASPLATA: 0,
+            MEDALLASBRONCE: 1,
+            RETIRADO: "S"
+        }
+
+        let msj = Deportistas.plantillaFormularioPersona.formulario
+        expect(msj.includes(d.NOMBRE)).toBeTrue();
+        expect(msj.includes(d.EDAD)).toBeTrue();
+        expect(msj.includes(d.SEXO)).toBeTrue();
+        expect(msj.includes(d.PAIS)).toBeTrue();
+        expect(msj.includes(d.ALTURA)).toBeTrue();
+        expect(msj.includes(d.CAMPEONATOSMUNDO)).toBeTrue();
+        expect(msj.includes(d.CIUDAD)).toBeTrue();
+        expect(msj.includes(d.PARTICIPACIONESJJOO)).toBeTrue();
+        expect(msj.includes(d.RETIRADO)).toBeTrue();
+        expect(msj.includes(d.MEDALLASORO)).toBeTrue();
+        expect(msj.includes(d.MEDALLASBRONCE)).toBeTrue();
+        expect(msj.includes(d.MEDALLASPLATA)).toBeTrue();
+
+    });
+});
+
