@@ -16,10 +16,11 @@ https://trello.com/b/QIs0WzuA/pr%C3%A1ctica-3-remo
 ![coleccion_fauna](./assets/img/coleciones_fauna.PNG)
 ### Documentos
 Primer documento
-```{
+```
+{
   nombre: "Steve Redgrave",
   edad: 60,
-  reprentacion: "Reino Unido",
+  campeonatosMundo: 8,
   participacionesJJOO: [1984, 1988, 1992, 1996, 2000],
   nacionalidad: [
     {
@@ -40,7 +41,7 @@ Segundo documento
 {
   nombre: "Aina Cid",
   edad: 28,
-  reprentacion: "España",
+  campeonatosMundo: 0,
   participacionesJJOO: [2016, 2020],
   nacionalidad: [
     {
@@ -61,7 +62,7 @@ Tercer documento
 {
   nombre: "Elisabeta Lipa",
   edad: 58,
-  reprentacion: "Rumania",
+  campeonatosMundo: 0,
   participacionesJJOO: [1984, 1988, 1992, 1996, 2000, 2004],
   nacionalidad: [
     {
@@ -82,7 +83,7 @@ Cuarto documento
 {
   nombre: "Jaime Canalejo",
   edad: 31,
-  reprentacion: "España",
+  campeonatosMundo: 0,
   participacionesJJOO: [2020],
   nacionalidad: [
     {
@@ -103,7 +104,7 @@ Quinto documento
 {
   nombre: "Virginia Diaz",
   edad: 31,
-  reprentacion: "España",
+  campeonatosMundo: 0,
   participacionesJJOO: [2020],
   nacionalidad: [
     {
@@ -124,7 +125,7 @@ Sexto documento
 {
   nombre: "Stefanos Duskos",
   edad: 25,
-  reprentacion: "Grecia",
+  campeonatosMundo: 0,
   participacionesJJOO: [2020],
   nacionalidad: [
     {
@@ -145,7 +146,7 @@ Séptimo documento
 {
   nombre: "Damir Martin",
   edad: 34,
-  reprentacion: "Croacia",
+  campeonatosMundo: 2,
   participacionesJJOO: [2012, 2016, 2020],
   nacionalidad: [
     {
