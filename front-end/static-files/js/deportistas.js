@@ -405,7 +405,7 @@ Deportistas.listarNombres = function () {
 Deportistas.deportistaModifica = function(deportista){
     return Deportistas.plantillaTablaUnDeportista.cabecera
     + Deportistas.plantillaModifica.actualiza(deportista)
-    + Deportistas.plantillaTablaUnDeportista.pie;
+    + Deportistas.plantillaTablaPersonasDatos.pie;
 }
 
 Deportistas.deportistaComoTabla = function (deportista) {

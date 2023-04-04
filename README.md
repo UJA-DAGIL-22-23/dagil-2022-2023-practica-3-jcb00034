@@ -276,3 +276,8 @@ Para este último incremento, las historias de usuario implementadas son la 6, l
 ![HU_8](./assets/icr3/HU_8.PNG)
 ##### HU_12
 ![HU_12](./assets/icr3/HU_12.PNG)
+
+#### Tablero Trello al finalizar el incremento
+![trello-inc3-fin](./assets/icr3/trello-inc3-fin.PNG)
+
+Este último incremento, al igual que todos los anteriores, se ha completado sin muchas incidencias.
