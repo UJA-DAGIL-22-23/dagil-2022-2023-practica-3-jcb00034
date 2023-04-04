@@ -18,6 +18,10 @@
 .mostrar {
     display: inline-block;
 }
+.borrar{
+    display: inline-block;
+    color: #ca3a11;
+}
 
 
 

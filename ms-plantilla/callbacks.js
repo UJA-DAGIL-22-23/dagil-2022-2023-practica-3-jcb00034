@@ -67,16 +67,17 @@ const CB_MODEL_SELECTS = {
      */
     getTodas: async (req, res) => {
         try {
-            let personas = await client.query(
+            let deportistas = await client.query(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection(COLLECTION))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
+
             // console.log( personas ) // Para comprobar qué se ha devuelto en personas
             CORS(res)
                 .status(200)
-                .json(personas)
+                .json(deportistas)
         } catch (error) {
             CORS(res).status(500).json({error: error.description})
         }
@@ -88,7 +89,7 @@ const CB_MODEL_SELECTS = {
             ).then((ret) => {
                 CORS(res)
                     .status(200)
-                    .header( 'Content-Type', 'application/json' )
+                    .header('Content-Type', 'application/json')
                     .json(ret)
             })
         } catch (error) {
@@ -133,14 +134,27 @@ const CB_MODEL_SELECTS = {
                     console.log("Valor devuelto ", ret)
                     CORS(res)
                         .status(200)
-                        .header( 'Content-Type', 'application/json' )
+                        .header('Content-Type', 'application/json')
                         .json(ret)
                 })
 
         } catch (error) {
-            CORS(res).status(500).json({ error: error.description })
+            CORS(res).status(500).json({error: error.description})
         }
-    }
+    },
+    getPorId: async (req, res) => {
+        try {
+            let persona = await client.query(
+                q.Get(q.Ref(q.Collection(COLLECTION), req.params.id))
+            )
+            CORS(res)
+                .status(200)
+                .json(persona)
+        } catch (error) {
+            CORS(res).status(500).json({error: error.description})
+        }
+    },
+
 }
 
 

@@ -263,3 +263,16 @@ Las historias de usuario escogidas para este segundo incremento son la 3, la 16 
 En este incremento, al igual que en el anterior, se ha completado sin muchas incidencias.
 
 También se ha aprovechado para distribuir y mejorar visualmente las historias de usuario del incremento anterior, mejorando la interfaz del usuario a la hora de visualizar las tablas de datos y nombres de deportistas 
+### Tercer incremento
+Para este último incremento, las historias de usuario implementadas son la 6, la 8 y 12.
+
+#### Tablero Trello al iniciar el incremento
+![trello-inc3](./assets/icr3/Trello-inc3.PNG)
+
+#### Funcionalidades implementadas
+##### HU_6
+![HU_6](./assets/icr3/HU_6.PNG)
+##### HU_8
+![HU_8](./assets/icr3/HU_8.PNG)
+##### HU_12
+![HU_12](./assets/icr3/HU_12.PNG)

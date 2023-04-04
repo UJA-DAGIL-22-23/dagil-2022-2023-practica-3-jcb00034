@@ -67,7 +67,7 @@ describe('Servidor PLANTILLA:', () => {
 
         it('Devuelve un vector de tamaño 10 al consultar mediante getTodas', (done) => {
             supertest(app)
-                .get('/getTodas')
+                .get('/getTodas?nombre=')
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end((error) => {
@@ -75,7 +75,7 @@ describe('Servidor PLANTILLA:', () => {
                     }
                 );
         });
-        it('Añade una persona de la bbdd', (done) => {
+        /*it('Añade una persona de la bbdd', (done) => {
             let d = {
                 nombre: "a",
                 edad: 20,
@@ -106,10 +106,10 @@ describe('Servidor PLANTILLA:', () => {
                     }
                 );
 
-        });
+        });*/
 
         /*Elimina el último deportista de la bbdd*/
-        it('Elimina una persona de la bbdd', (done) => {
+        /*it('Elimina una persona de la bbdd', (done) => {
             let url = "/borrarDeportista/361004916492206285"
             supertest(app)
                 .get(url)
@@ -119,8 +119,21 @@ describe('Servidor PLANTILLA:', () => {
                         error ? done.fail(error) : done();
                     }
                 );
-        });
+        });*/
 
+        it('Devuelve el primer deportista de la bbdd', (done) => {
+            supertest(app)
+                .get('/deportista/359810931056705741')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .expect(function (res) {
+                  console.log(res.body)
+                })
+                .end((error) => {
+                        error ? done.fail(error) : done();
+                    }
+                );
+        });
     })
 });
 

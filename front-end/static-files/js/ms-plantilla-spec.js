@@ -12,7 +12,6 @@ const elementoTitulo = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_TIT
 const elementoContenido = document.getElementById(Frontend.ID_SECCION_PRINCIPAL_CONTENIDO)
 const TITULO_HOME = "Plantilla Home"
 const TITULO_ACERCA_DE = "Plantilla Acerca de"
-const TITULO_LISTA = "Listado de personas"
 
 const datosDescargadosPrueba = {
     mensaje: "Mensaje de prueba descargado",

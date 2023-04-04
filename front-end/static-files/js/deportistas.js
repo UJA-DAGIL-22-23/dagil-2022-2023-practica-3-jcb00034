@@ -5,14 +5,14 @@ Deportistas.form = {
     EDAD: "form-edad",
     CAMPEONATOSMUNDO: "form-c",
     PARTICIPACIONESJJOO: "form-participaciones",
-    PAIS:"form-pais",
-    CIUDAD:"form-ciudad",
-    ALTURA:"form-altura",
-    SEXO:"form-sexo",
+    PAIS: "form-pais",
+    CIUDAD: "form-ciudad",
+    ALTURA: "form-altura",
+    SEXO: "form-sexo",
     MEDALLASORO: "form-medallas-oro",
     MEDALLASBRONCE: "form-medallas-bronce",
     MEDALLASPLATA: "form-medallas-plata",
-    RETIRADO:"form-retirado"
+    RETIRADO: "form-retirado"
 }
 
 Deportistas.plantillaFormularioPersona = {}
@@ -77,18 +77,19 @@ Deportistas.plantillaFormularioPersona.formulario = `
 <br/>`;
 
 /// Objeto para almacenar los datos de la persona que se está mostrando
-Deportistas.personaMostrada = null
+Deportistas.deportistaMostrado = null
+Deportistas.vectorDeportistas = null
 
 // Tags que voy a usar para sustituir los campos
 Deportistas.plantillaTags = {
-    "ID":"### ID ###",
+    "ID": "### ID ###",
     "NOMBRE": "### NOMBRE ###",
     "EDAD": "### EDAD ###",
     "CAMPEONATOSMUNDO": "### CAMPEONATOS DEL MUNDO ###",
-    "PARTICIPACIONESJJOO":"### PARTICIPACIONES JJOO ###",
-    "PAIS":"### PAIS ###",
-    "CIUDAD":"### CIUDAD ###",
-    "ALTURA":"### ALTURA ###",
+    "PARTICIPACIONESJJOO": "### PARTICIPACIONES JJOO ###",
+    "PAIS": "### PAIS ###",
+    "CIUDAD": "### CIUDAD ###",
+    "ALTURA": "### ALTURA ###",
     "SEXO": "### SEXO ###",
     "MEDALLASORO": "### MEDALAS DE ORO ###",
     "MEDALLASPLATA": "### MEDALLAS DE PLATA ###",
@@ -96,15 +97,22 @@ Deportistas.plantillaTags = {
     "RETIRADO": "### RETIRADO ###"
 }
 Deportistas.DatosNulos = `<h4>No se ha podido acceder correctamente a los datos</h4>`
-
+Deportistas.DatosNoEncontrado = `<h4>Ninguno de los datos coincide con los criterios de búsqueda</h4>`
 /// Plantilla para poner los datos de varias personas dentro de una tabla
 Deportistas.plantillaTablaPersonasDatos = {}
 Deportistas.plantillaTablaPersonasNombres = {}
+Deportistas.plantillaTablaUnDeportista = {}
 
 
 // Cabecera de la tabla
 Deportistas.plantillaTablaPersonasDatos.cabecera = `
                     <div>
+                    <input type="text" class="form-persona-elemento editable" 
+                        id="filter-nombre" required 
+                        name="nombre" value=""/> 
+                        <a href="javascript:Deportistas.filtraNombreD()" class="opcion-principal mostrar">
+                            Buscar
+                        </a>
                         <a href="javascript:Deportistas.OrdenarAlfabeticamenteD()" class="opcion-principal mostrar">
                             Ordenar alfabéticamente
                         </a>
@@ -131,12 +139,19 @@ Deportistas.plantillaTablaPersonasDatos.cabecera = `
 
 Deportistas.plantillaTablaPersonasNombres.cabecera = `
                     <div>
+                        <input type="text" class="form-persona-elemento editable" 
+                            id="filter-nombre" required 
+                            name="nombre" value=""/> 
+                        <a href="javascript:Deportistas.filtraNombreN()" class="opcion-principal mostrar">
+                            Buscar
+                        </a>
                         <a href="javascript:Deportistas.OrdenarAlfabeticamenteN()" class="opcion-principal mostrar">
                             Ordenar alfabéticamente
                         </a>
                         <a href="javascript:Deportistas.listarDatos()" class="opcion-principal mostrar">
                             listar Datos
                         </a>
+                        
                     </div>
                     <table width="100%" class="listado-personas">
                     <thead>
@@ -161,8 +176,43 @@ Deportistas.plantillaTablaPersonasDatos.cuerpo = `
         <td>${Deportistas.plantillaTags.SEXO}</td>
         <td>${Deportistas.plantillaTags.RETIRADO}</td>
         <td>
-                    <div><a href="javascript:Deportistas.borrarD('${Deportistas.plantillaTags.ID}')" class="opcion-principal mostrar">Borrar</a></div>
+        <div><a href="javascript:Deportistas.mostrar('${Deportistas.plantillaTags.ID}')" class="opcion-principal mostrar">Mostrar</a></div> 
+        <div><a href="javascript:Deportistas.borrarD('${Deportistas.plantillaTags.ID}')" class="opcion-principal borrar">Borrar</a></div>
         </td>
+    </tr>
+    `;
+
+
+Deportistas.plantillaTablaUnDeportista.cabecera = `
+                    <table width="100%" class="listado-personas">
+                    <thead>
+                        <th width="10%">ID</th>
+                        <th width="10%">Nombre</th>
+                        <th width="5%">Edad</th>
+                        <th width="15%">Campeonatos del mundo</th>
+                        <th width="15%">Participaciones en JJOO</th>
+                        <th width="10%">Pais</th>
+                        <th width="10%">Ciudad</th>
+                        <th width="5%">Altura</th>
+                        <th width="5%">Sexo</th>
+                        <th width="10%">Retirado</th>
+                    </thead>
+                    <tbody>
+    `;
+
+// Elemento TR que muestra los datos de una persona
+Deportistas.plantillaTablaUnDeportista.cuerpo = `
+    <tr title="${Deportistas.plantillaTags.ID}">
+        <td>${Deportistas.plantillaTags.ID}</td>
+        <td>${Deportistas.plantillaTags.NOMBRE}</td>
+        <td>${Deportistas.plantillaTags.EDAD}</td>
+        <td>${Deportistas.plantillaTags.CAMPEONATOSMUNDO}</td>
+        <td>${Deportistas.plantillaTags.PARTICIPACIONESJJOO}</td>
+        <td>${Deportistas.plantillaTags.PAIS}</td>
+        <td>${Deportistas.plantillaTags.CIUDAD}</td>
+        <td>${Deportistas.plantillaTags.ALTURA}</td>
+        <td>${Deportistas.plantillaTags.SEXO}</td>
+        <td>${Deportistas.plantillaTags.RETIRADO}</td>
     </tr>
     `;
 
@@ -171,7 +221,8 @@ Deportistas.plantillaTablaPersonasNombres.cuerpo = `
         <td>${Deportistas.plantillaTags.ID}</td>
         <td>${Deportistas.plantillaTags.NOMBRE}</td>
         <td>
-                    <div><a href="javascript:Deportistas.borrarN('${Deportistas.plantillaTags.ID}')" class="opcion-principal mostrar">Borrar</a></div>
+        <div><a href="javascript:Deportistas.mostrar('${Deportistas.plantillaTags.ID}')" class="opcion-principal mostrar">Mostrar</a></div> 
+        <div><a href="javascript:Deportistas.borrarD('${Deportistas.plantillaTags.ID}')" class="opcion-principal borrar">Borrar</a></div>
         </td>
     </tr>
     `;
@@ -179,30 +230,30 @@ Deportistas.plantillaTablaPersonasNombres.cuerpo = `
 // Pie de la tabla
 Deportistas.plantillaTablaPersonasDatos.pie = `</tbody></table>`;
 
-Deportistas.comparaNombre = function(a,b){
-    if(a.data.nombre > b.data.nombre){
+Deportistas.comparaNombre = function (a, b) {
+    if (a.data.nombre > b.data.nombre) {
         return 1;
     }
-    if(a.data.nombre < b.data.nombre){
+    if (a.data.nombre < b.data.nombre) {
         return -1;
     }
 
     return 0;
 }
-Deportistas.OrdenarNombres = function(vector){
+Deportistas.OrdenarNombres = function (vector) {
     Deportistas.imprimeNombreMuchasPersonas(vector.sort(Deportistas.comparaNombre))
 }
 
-Deportistas.OrdenarDatos = function(vector){
+Deportistas.OrdenarDatos = function (vector) {
     Deportistas.imprimeDatosMuchasPersonas(vector.sort(Deportistas.comparaNombre))
 }
 
-Deportistas.OrdenarAlfabeticamenteN = function(){
+Deportistas.OrdenarAlfabeticamenteN = function () {
     Deportistas.recupera(Deportistas.OrdenarNombres)
 
 }
 
-Deportistas.OrdenarAlfabeticamenteD = function(){
+Deportistas.OrdenarAlfabeticamenteD = function () {
     Deportistas.recupera(Deportistas.OrdenarDatos)
 
 }
@@ -245,6 +296,9 @@ Deportistas.plantillaTablaPersonasDatos.actualiza = function (deportista) {
 Deportistas.plantillaTablaPersonasNombres.actualiza = function (deportista) {
     return Deportistas.sustituyeTagsNombre(this.cuerpo, deportista)
 }
+Deportistas.plantillaTablaUnDeportista.actualiza = function (deportista) {
+    return Deportistas.sustituyeTagsDatos(this.cuerpo, deportista)
+}
 
 
 /**
@@ -256,13 +310,17 @@ Deportistas.imprimeNombreMuchasPersonas = function (vector) {
     // console.log(vector) // Para comprobar lo que hay en vector
 
     // Compongo el contenido que se va a mostrar dentro de la tabla
-    let msj="";
-    if(vector !== null) {
-        msj = Deportistas.plantillaTablaPersonasNombres.cabecera
-        vector.forEach(e => msj += Deportistas.plantillaTablaPersonasNombres.actualiza(e))
-        msj += Deportistas.plantillaTablaPersonasDatos.pie
-    }else{
-        msj+=Deportistas.DatosNulos
+    let msj = "";
+    if (vector !== null) {
+        if (vector.length > 0) {
+            msj = Deportistas.plantillaTablaPersonasNombres.cabecera
+            vector.forEach(e => msj += Deportistas.plantillaTablaPersonasNombres.actualiza(e))
+            msj += Deportistas.plantillaTablaPersonasDatos.pie
+        } else {
+            msj += Deportistas.DatosNoEncontrado
+        }
+    } else {
+        msj += Deportistas.DatosNulos
     }
     // Borro toda la info de Article y la sustituyo por la que me interesa
     Frontend.Article.actualizar("Listado de nombres de deportistas", msj)
@@ -272,13 +330,17 @@ Deportistas.imprimeDatosMuchasPersonas = function (vector) {
     // console.log(vector) // Para comprobar lo que hay en vector
 
     // Compongo el contenido que se va a mostrar dentro de la tabla
-    let msj="";
-    if(vector !== null) {
-        msj = Deportistas.plantillaTablaPersonasDatos.cabecera
-        vector.forEach(e => msj += Deportistas.plantillaTablaPersonasDatos.actualiza(e))
-        msj += Deportistas.plantillaTablaPersonasDatos.pie
-    }else{
-        msj+=Deportistas.DatosNulos
+    let msj = "";
+    if (vector !== null) {
+        if (vector.length > 0) {
+            msj = Deportistas.plantillaTablaPersonasDatos.cabecera
+            vector.forEach(e => msj += Deportistas.plantillaTablaPersonasDatos.actualiza(e))
+            msj += Deportistas.plantillaTablaPersonasDatos.pie
+        } else {
+            msj += Deportistas.DatosNoEncontrado
+        }
+    } else {
+        msj += Deportistas.DatosNulos
     }
     // Borro toda la info de Article y la sustituyo por la que me interesa
     Frontend.Article.actualizar("Listado de datos de deportistas", msj)
@@ -295,7 +357,31 @@ Deportistas.listarNombres = function () {
     Deportistas.recupera(Deportistas.imprimeNombreMuchasPersonas);
 }
 
-Deportistas.crear = function(){
+Deportistas.deportistaComoTabla = function (deportista) {
+    return Deportistas.plantillaTablaUnDeportista.cabecera
+        + Deportistas.plantillaTablaUnDeportista.actualiza(deportista)
+        + Deportistas.plantillaTablaPersonasDatos.pie;
+}
+
+Deportistas.imprimeUnaPersona = function (deportista) {
+    // console.log(persona) // Para comprobar lo que hay en vector
+    let msj = Deportistas.deportistaComoTabla(deportista);
+
+    // Borro toda la info de Article y la sustituyo por la que me interesa
+    Frontend.Article.actualizar("Mostrar un deportista", msj)
+
+    Deportistas.almacenaDatos(deportista)
+}
+
+Deportistas.almacenaDatos = function (deportista) {
+    Deportistas.deportistaMostrado = deportista;
+}
+
+Deportistas.mostrar = function (id) {
+    this.recuperaUnDeportista(id, Deportistas.imprimeUnaPersona);
+}
+
+Deportistas.crear = function () {
     let msj = Deportistas.plantillaFormularioPersona.formulario
     Frontend.Article.actualizar("Crear nuevo deportista", msj)
 }
@@ -319,12 +405,13 @@ Deportistas.recupera = async function (callBackFn) {
     if (response) {
         vectorPersonas = await response.json()
         callBackFn(vectorPersonas.data)
+        Deportistas.almacenaVector(vectorPersonas.data)
     }
 }
 
-Deportistas.borrarN = async function(id){
+Deportistas.borrarN = async function (id) {
     try {
-        const url = Frontend.API_GATEWAY + "/plantilla/borrarDeportista/"+id
+        const url = Frontend.API_GATEWAY + "/plantilla/borrarDeportista/" + id
         const response = await fetch(url)
         alert("Tu deportista se ha eliminado correctamente")
         Deportistas.listarNombres()
@@ -334,9 +421,9 @@ Deportistas.borrarN = async function(id){
     }
 }
 
-Deportistas.borrarD = async function(id){
+Deportistas.borrarD = async function (id) {
     try {
-        const url = Frontend.API_GATEWAY + "/plantilla/borrarDeportista/"+id
+        const url = Frontend.API_GATEWAY + "/plantilla/borrarDeportista/" + id
         const response = await fetch(url)
         alert("Tu deportista se ha eliminado correctamente")
         Deportistas.listarDatos()
@@ -345,46 +432,72 @@ Deportistas.borrarD = async function(id){
         //console.error(error)
     }
 }
-    Deportistas.guardar = async function () {
-        try {
-            let url = Frontend.API_GATEWAY + "/plantilla/crearDeportista"
-            let participaciones = document.getElementById("form-participaciones").value
-            let pJJOO = participaciones.split(',')
-            console.log(pJJOO)
-            let retirado = document.getElementById("form-retirado").value
-            let r = false
-            if(retirado === "S"){
-                r = true
-            }
-            const response = await fetch(url, {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                mode: 'no-cors', // no-cors, cors, *same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-                credentials: 'omit', // include, *same-origin, omit
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrer: 'no-referrer', // no-referrer, *client
-                body: JSON.stringify({
-                    "nombre": document.getElementById("form-nombre").value,
-                    "edad": document.getElementById("form-edad").value,
-                    "campeonatosmundo": document.getElementById("form-c").value,
-                    "participacionesjjoo": pJJOO,
-                    "pais": document.getElementById("form-pais").value,
-                    "ciudad": document.getElementById("form-ciudad").value,
-                    "altura": document.getElementById("form-altura").value,
-                    "sexo": document.getElementById("form-sexo").value,
-                    "medallasoro": document.getElementById("form-medallas-oro").value,
-                    "medallasplata": document.getElementById("form-medallas-plata").value,
-                    "medallasbronce": document.getElementById("form-medallas-bronce").value,
-                    "retirado": r
-                }), // body data type must match "Content-Type" header
-            })
-            alert("Tu deportista se ha añadido correctamente (puede visualizarlo en el listado)")
-        } catch (error) {
-            alert("Error: No se han podido acceder al API Gateway " + error)
-            //console.error(error)
+Deportistas.guardar = async function () {
+    try {
+        let url = Frontend.API_GATEWAY + "/plantilla/crearDeportista"
+        let participaciones = document.getElementById("form-participaciones").value
+        let pJJOO = participaciones.split(',')
+        console.log(pJJOO)
+        let retirado = document.getElementById("form-retirado").value
+        let r = false
+        if (retirado === "S") {
+            r = true
         }
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify({
+                "nombre": document.getElementById("form-nombre").value,
+                "edad": document.getElementById("form-edad").value,
+                "campeonatosmundo": document.getElementById("form-c").value,
+                "participacionesjjoo": pJJOO,
+                "pais": document.getElementById("form-pais").value,
+                "ciudad": document.getElementById("form-ciudad").value,
+                "altura": document.getElementById("form-altura").value,
+                "sexo": document.getElementById("form-sexo").value,
+                "medallasoro": document.getElementById("form-medallas-oro").value,
+                "medallasplata": document.getElementById("form-medallas-plata").value,
+                "medallasbronce": document.getElementById("form-medallas-bronce").value,
+                "retirado": r
+            }), // body data type must match "Content-Type" header
+        })
+        alert("Tu deportista se ha añadido correctamente (puede visualizarlo en el listado)")
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway " + error)
+    }
 
+}
+Deportistas.recuperaUnDeportista = async function (id, callBackFn) {
+    try {
+        const url = Frontend.API_GATEWAY + "/plantilla/deportista/" + id
+        const response = await fetch(url);
+        if (response) {
+            const deportista = await response.json()
+            callBackFn(deportista)
+        }
+    } catch (error) {
+        alert("Error: No se han podido acceder al API Gateway")
+        console.error(error)
+    }
+}
+
+Deportistas.almacenaVector = function (vector) {
+    this.vectorDeportistas = vector
+}
+
+Deportistas.filtraNombreN = function () {
+    let n = document.getElementById("filter-nombre").value
+    Deportistas.imprimeNombreMuchasPersonas(this.vectorDeportistas.filter(each => each.data.nombre.includes(n)))
+}
+
+Deportistas.filtraNombreD = function () {
+    let n = document.getElementById("filter-nombre").value
+    Deportistas.imprimeDatosMuchasPersonas(this.vectorDeportistas.filter(each => each.data.nombre.includes(n)))
 }
