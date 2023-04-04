@@ -86,5 +86,16 @@ router.post("/crearDeportista", async (req, res) => {
     }
 });
 
+router.param("id", (req, res, next, id) => {
+    next();
+});
+router.post("/setDeportista/:id", async (req, res) => {
+    try {
+        await callbacks.setDeportista(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // Exporto el módulo para poder usarlo en server
 module.exports = router;

@@ -131,7 +131,6 @@ const CB_MODEL_SELECTS = {
                 )
             )
                 .then((ret) => {
-                    console.log("Valor devuelto ", ret)
                     CORS(res)
                         .status(200)
                         .header('Content-Type', 'application/json')
@@ -154,6 +153,45 @@ const CB_MODEL_SELECTS = {
             CORS(res).status(500).json({error: error.description})
         }
     },
+    setDeportista: async (req, res) => {
+        try {
+            let data = (Object.values(req.body)[0] === '') ? JSON.parse(Object.keys(req.body)[0]) : req.body
+            await client.query(
+                q.Update(
+                    q.Ref(q.Collection(COLLECTION), req.params.id),
+                    {
+                        data: {
+                            nombre: data.nombre,
+                            edad: data.edad,
+                            campeonatosMundo: data.campeonatosmundo,
+                            participacionesJJOO: data.participacionesjjoo,
+                            nacionalidad: [
+                                {
+                                    pais: data.pais,
+                                    ciudad: data.ciudad
+                                }
+                            ],
+                            altura: data.altura,
+                            sexo: data.sexo,
+                            medallasOro: data.medallasOro,
+                            medallasPlata: data.medallasPlata,
+                            medallasBronce: data.medallasBronce,
+                            retirado: data.retirado
+                        },
+                    }
+                )
+            )
+                .then((ret) => {
+                    CORS(res)
+                        .status(200)
+                        .header('Content-Type', 'application/json')
+                        .json(ret)
+                })
+
+        } catch (error) {
+            CORS(res).status(500).json({ error: error.description })
+        }
+    }
 
 }
 
