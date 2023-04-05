@@ -98,7 +98,7 @@ describe("Deportistas.cuerpoConDeportistasTr ", function () {
         });
 });
 
-describe("Deportistas.Ordenar", function () {
+describe("Deportistas.comparaNombre", function () {
     it("Comprobación d1 < d2",
         function () {
             expect(Deportistas.comparaNombre(d1, d2)).toBe(-1)
