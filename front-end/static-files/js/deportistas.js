@@ -402,10 +402,10 @@ Deportistas.listarNombres = function () {
     Deportistas.recupera(Deportistas.imprimeNombreMuchasPersonas);
 }
 
-Deportistas.deportistaModifica = function(deportista){
+Deportistas.deportistaModifica = function (deportista) {
     return Deportistas.plantillaTablaUnDeportista.cabecera
-    + Deportistas.plantillaModifica.actualiza(deportista)
-    + Deportistas.plantillaTablaPersonasDatos.pie;
+        + Deportistas.plantillaModifica.actualiza(deportista)
+        + Deportistas.plantillaTablaPersonasDatos.pie;
 }
 
 Deportistas.deportistaComoTabla = function (deportista) {
@@ -416,8 +416,13 @@ Deportistas.deportistaComoTabla = function (deportista) {
 
 Deportistas.imprimeUnaPersona = function (deportista) {
     // console.log(persona) // Para comprobar lo que hay en vector
-    let msj = Deportistas.deportistaComoTabla(deportista);
-
+    let msj = "";
+    if (deportista !== null) {
+        msj = Deportistas.deportistaComoTabla(deportista);
+    }
+    else{
+        msj = Deportistas.DatosNulos;
+    }
     // Borro toda la info de Article y la sustituyo por la que me interesa
     Frontend.Article.actualizar("Mostrar un deportista", msj)
 
@@ -527,13 +532,13 @@ Deportistas.guardar = async function () {
 }
 
 
-Deportistas.modificar = function(){
+Deportistas.modificar = function () {
     let msj = Deportistas.deportistaModifica(this.deportistaMostrado);
     Frontend.Article.actualizar("Modificar un deportista", msj)
 }
 
 /*Convertimos la función a asíncrona para que se muestren los datos actualizados*/
-Deportistas.guardarModificacion = async function(id){
+Deportistas.guardarModificacion = async function (id) {
     await this.modificarDeportista(id)
     this.mostrar(id)
 }
@@ -572,7 +577,6 @@ Deportistas.modificarDeportista = async function (id) {
     }
 
 }
-
 
 
 Deportistas.recuperaUnDeportista = async function (id, callBackFn) {
