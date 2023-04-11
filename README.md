@@ -272,7 +272,7 @@ En este incremento, al igual que en el anterior, se ha completado sin muchas inc
 También se ha aprovechado para distribuir y mejorar visualmente las historias de usuario del incremento anterior, mejorando la interfaz del usuario a la hora de visualizar las tablas de datos y nombres de deportistas 
 
 ### Tercer incremento
-Para este último in[README.md](README.md)cremento, las historias de usuario implementadas son la 6, la 8 y 12.
+Para este último incremento, las historias de usuario implementadas son la 6, la 8 y 12.
 
 #### Tablero Trello al iniciar el incremento
 ![trello-inc3](./assets/icr3/Trello-inc3.PNG)
