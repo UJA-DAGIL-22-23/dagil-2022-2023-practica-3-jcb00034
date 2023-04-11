@@ -15,11 +15,11 @@ Deportistas.form = {
     RETIRADO: "form-retirado"
 }
 
-Deportistas.plantillaFormularioPersona = {}
+Deportistas.formularioDeportista = {}
 
 
 // Cabecera del formulario
-Deportistas.plantillaFormularioPersona.formulario = `
+Deportistas.formularioDeportista.formulario = `
 <form method='post' action='' class="listado-personas">
 
     <p>Nombre del deportista</p>
@@ -99,14 +99,14 @@ Deportistas.plantillaTags = {
 Deportistas.DatosNulos = `<h4>No se ha podido acceder correctamente a los datos</h4>`
 Deportistas.DatosNoEncontrado = `<h4>Ninguno de los datos coincide con los criterios de búsqueda</h4>`
 /// Plantilla para poner los datos de varias personas dentro de una tabla
-Deportistas.plantillaTablaPersonasDatos = {}
-Deportistas.plantillaTablaPersonasNombres = {}
-Deportistas.plantillaTablaUnDeportista = {}
+Deportistas.tablaDeportistasDatos = {}
+Deportistas.tablaDeportistasNombres = {}
+Deportistas.tablaUnDeportista = {}
 Deportistas.plantillaModifica = {}
 
 
 // Cabecera de la tabla
-Deportistas.plantillaTablaPersonasDatos.cabecera = `
+Deportistas.tablaDeportistasDatos.cabecera = `
                     <div>
                     <input type="text" class="form-persona-elemento editable" 
                         id="filter-nombre" required 
@@ -141,7 +141,7 @@ Deportistas.plantillaTablaPersonasDatos.cabecera = `
                     <tbody>
     `;
 
-Deportistas.plantillaTablaPersonasNombres.cabecera = `
+Deportistas.tablaDeportistasNombres.cabecera = `
                     <div>
                         <input type="text" class="form-persona-elemento editable" 
                             id="filter-nombre" required 
@@ -167,7 +167,7 @@ Deportistas.plantillaTablaPersonasNombres.cabecera = `
     `;
 
 // Elemento TR que muestra los datos de una persona
-Deportistas.plantillaTablaPersonasDatos.cuerpo = `
+Deportistas.tablaDeportistasDatos.cuerpo = `
     <tr title="${Deportistas.plantillaTags.ID}">
         <td>${Deportistas.plantillaTags.ID}</td>
         <td>${Deportistas.plantillaTags.NOMBRE}</td>
@@ -190,7 +190,7 @@ Deportistas.plantillaTablaPersonasDatos.cuerpo = `
     `;
 
 
-Deportistas.plantillaTablaUnDeportista.cabecera = `
+Deportistas.tablaUnDeportista.cabecera = `
                     <table width="100%" class="listado-personas">
                     <thead>
                         <th width="10%">ID</th>
@@ -211,7 +211,7 @@ Deportistas.plantillaTablaUnDeportista.cabecera = `
                     <tbody>
     `;
 
-Deportistas.plantillaTablaUnDeportista.cuerpo = `
+Deportistas.tablaUnDeportista.cuerpo = `
     <tr title="${Deportistas.plantillaTags.ID}">
         <td>${Deportistas.plantillaTags.ID}</td>
         <td>${Deportistas.plantillaTags.NOMBRE}</td>
@@ -254,7 +254,7 @@ Deportistas.plantillaModifica.cuerpo = `
     </tr>
     `;
 
-Deportistas.plantillaTablaPersonasNombres.cuerpo = `
+Deportistas.tablaDeportistasNombres.cuerpo = `
     <tr title="${Deportistas.plantillaTags.ID}">
         <td>${Deportistas.plantillaTags.ID}</td>
         <td>${Deportistas.plantillaTags.NOMBRE}</td>
@@ -266,7 +266,7 @@ Deportistas.plantillaTablaPersonasNombres.cuerpo = `
     `;
 
 // Pie de la tabla
-Deportistas.plantillaTablaPersonasDatos.pie = `</tbody></table>`;
+Deportistas.tablaDeportistasDatos.pie = `</tbody></table>`;
 
 Deportistas.comparaNombre = function (a, b) {
     if (a.data.nombre > b.data.nombre) {
@@ -330,14 +330,14 @@ Deportistas.sustituyeTagsNombre = function (plantilla, deportista) {
  * @param {Deportista} Deportista Objeto con los datos de la persona que queremos escribir en el TR
  * @returns La plantilla del cuerpo de la tabla con los datos actualizados
  */
-Deportistas.plantillaTablaPersonasDatos.actualiza = function (deportista) {
+Deportistas.tablaDeportistasDatos.actualiza = function (deportista) {
     return Deportistas.sustituyeTagsDatos(this.cuerpo, deportista)
 }
 
-Deportistas.plantillaTablaPersonasNombres.actualiza = function (deportista) {
+Deportistas.tablaDeportistasNombres.actualiza = function (deportista) {
     return Deportistas.sustituyeTagsNombre(this.cuerpo, deportista)
 }
-Deportistas.plantillaTablaUnDeportista.actualiza = function (deportista) {
+Deportistas.tablaUnDeportista.actualiza = function (deportista) {
     return Deportistas.sustituyeTagsDatos(this.cuerpo, deportista)
 }
 
@@ -358,9 +358,9 @@ Deportistas.imprimeNombreMuchasPersonas = function (vector) {
     let msj = "";
     if (vector !== null) {
         if (vector.length > 0) {
-            msj = Deportistas.plantillaTablaPersonasNombres.cabecera
-            vector.forEach(e => msj += Deportistas.plantillaTablaPersonasNombres.actualiza(e))
-            msj += Deportistas.plantillaTablaPersonasDatos.pie
+            msj = Deportistas.tablaDeportistasNombres.cabecera
+            vector.forEach(e => msj += Deportistas.tablaDeportistasNombres.actualiza(e))
+            msj += Deportistas.tablaDeportistasDatos.pie
         } else {
             msj += Deportistas.DatosNoEncontrado
         }
@@ -378,9 +378,9 @@ Deportistas.imprimeDatosMuchasPersonas = function (vector) {
     let msj = "";
     if (vector !== null) {
         if (vector.length > 0) {
-            msj = Deportistas.plantillaTablaPersonasDatos.cabecera
-            vector.forEach(e => msj += Deportistas.plantillaTablaPersonasDatos.actualiza(e))
-            msj += Deportistas.plantillaTablaPersonasDatos.pie
+            msj = Deportistas.tablaDeportistasDatos.cabecera
+            vector.forEach(e => msj += Deportistas.tablaDeportistasDatos.actualiza(e))
+            msj += Deportistas.tablaDeportistasDatos.pie
         } else {
             msj += Deportistas.DatosNoEncontrado
         }
@@ -403,15 +403,15 @@ Deportistas.listarNombres = function () {
 }
 
 Deportistas.deportistaModifica = function (deportista) {
-    return Deportistas.plantillaTablaUnDeportista.cabecera
+    return Deportistas.tablaUnDeportista.cabecera
         + Deportistas.plantillaModifica.actualiza(deportista)
-        + Deportistas.plantillaTablaPersonasDatos.pie;
+        + Deportistas.tablaDeportistasDatos.pie;
 }
 
 Deportistas.deportistaComoTabla = function (deportista) {
-    return Deportistas.plantillaTablaUnDeportista.cabecera
-        + Deportistas.plantillaTablaUnDeportista.actualiza(deportista)
-        + Deportistas.plantillaTablaPersonasDatos.pie;
+    return Deportistas.tablaUnDeportista.cabecera
+        + Deportistas.tablaUnDeportista.actualiza(deportista)
+        + Deportistas.tablaDeportistasDatos.pie;
 }
 
 Deportistas.imprimeUnaPersona = function (deportista) {
@@ -438,7 +438,7 @@ Deportistas.mostrar = function (id) {
 }
 
 Deportistas.crear = function () {
-    let msj = Deportistas.plantillaFormularioPersona.formulario
+    let msj = Deportistas.formularioDeportista.formulario
     Frontend.Article.actualizar("Crear nuevo deportista", msj)
 }
 

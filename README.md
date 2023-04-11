@@ -235,15 +235,19 @@ Para el primer incremento se han elegido las historias de usuario 1,2,4.
 #### Funcionalidades implementadas
 ##### HU_1
 ![HU_1](./assets/icr1/HU_1.PNG)
+Funcionalidad implementada en el botón "Acerca De"
 ##### HU_2
 ![HU_2](./assets/icr1/HU_2.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas"
 ##### HU_4
 ![HU_4](./assets/icr1/HU_4.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas" => "Listar Datos"
 
 #### Tablero Trello al finalizar el incremento
 ![trello_fin_incr1](./assets/icr1/trello-fin-incr1.PNG)
 
 Como se puede apreciar, este incremento se ha podido completar según lo planificado inicialmente y sin ningún imprevisto.
+
 ### Segundo incremento
 Las historias de usuario escogidas para este segundo incremento son la 3, la 16 y la 17
 #### Tablero Trello al iniciar el incremento
@@ -252,10 +256,13 @@ Las historias de usuario escogidas para este segundo incremento son la 3, la 16 
 #### Funcionalidades implementadas
 ##### HU_3
 ![HU_3](./assets/icr2/HU_3.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas" -> "Ordenar Alfabéticamente"
 ##### HU_16
 ![HU_16](./assets/icr2/HU_16.PNG)
+Funcionalidad implementada en el botón "Crear nuevo deportista"
 ##### HU_17
 ![HU_17](./assets/icr2/HU_17.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas" -> "Borrar"
 
 #### Tablero Trello al finalizar el incremento
 ![trello-inc2-fin](./assets/icr2/Trello-inc2-fin.PNG)
@@ -263,6 +270,7 @@ Las historias de usuario escogidas para este segundo incremento son la 3, la 16 
 En este incremento, al igual que en el anterior, se ha completado sin muchas incidencias.
 
 También se ha aprovechado para distribuir y mejorar visualmente las historias de usuario del incremento anterior, mejorando la interfaz del usuario a la hora de visualizar las tablas de datos y nombres de deportistas 
+
 ### Tercer incremento
 Para este último in[README.md](README.md)cremento, las historias de usuario implementadas son la 6, la 8 y 12.
 
@@ -272,10 +280,13 @@ Para este último in[README.md](README.md)cremento, las historias de usuario imp
 #### Funcionalidades implementadas
 ##### HU_6
 ![HU_6](./assets/icr3/HU_6.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas" -> "Mostrar"
 ##### HU_8
 ![HU_8](./assets/icr3/HU_8.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas" -> "Buscar"
 ##### HU_12
 ![HU_12](./assets/icr3/HU_12.PNG)
+Funcionalidad implementada en el botón "Listar Deportistas" -> "Mostrar" -> "Modificar"
 
 #### Tablero Trello al finalizar el incremento
 ![trello-inc3-fin](./assets/icr3/trello-inc3-fin.PNG)

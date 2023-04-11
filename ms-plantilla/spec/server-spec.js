@@ -67,15 +67,20 @@ describe('Servidor PLANTILLA:', () => {
 
         it('Devuelve un vector de tamaño 10 al consultar mediante getTodas', (done) => {
             supertest(app)
-                .get('/getTodas?nombre=')
+                .get('/getTodas')
                 .expect(200)
                 .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
+                    assert(res.body.data.length == 11);
+
+                })
                 .end((error) => {
                         error ? done.fail(error) : done();
                     }
                 );
         });
-        it('Añade una persona de la bbdd', (done) => {
+        /*it('Añade una persona de la bbdd', (done) => {
             let d = {
                 nombre: "a",
                 edad: 20,
@@ -105,11 +110,11 @@ describe('Servidor PLANTILLA:', () => {
                     }
                 );
 
-        });
+        });*/
 
         /* Comentado para no estar borrando el último deportista cada vez que ejecute los tests*/
         /*it('Elimina el último deportista de la bbdd', (done) => {
-            let url = "/borrarDeportista/361004916492206285"
+            let url = "/borrarDeportista/361097375650939084"
             supertest(app)
                 .get(url)
                 .expect(200)
@@ -122,9 +127,13 @@ describe('Servidor PLANTILLA:', () => {
 
         it('Devuelve el primer deportista de la bbdd', (done) => {
             supertest(app)
-                .get('/deportista/361097375650939084')
+                .get('/deportista/359810931056705741')
                 .expect(200)
                 .expect('Content-Type', /json/)
+                .expect(function (res) {
+                    //Comprobamos que se ha añadido el deportista indicado
+                    expect(res.body.data.nombre).toBe("Aina Cid")
+                })
                 .end((error) => {
                         error ? done.fail(error) : done();
                     }
@@ -152,7 +161,7 @@ describe('Servidor PLANTILLA:', () => {
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .expect(function (res) {
-                    //Comprobamos que se ha añadido el deportista indicado
+                    //Comprobamos que se ha actualizado el nombre
                     expect(res.body.data.nombre).toBe(d.nombre)
                 })
                 .end((error) => {

@@ -52,7 +52,7 @@ let d2 = {
 describe("Deportistas.Pietable ", function () {
     it("debería devolver las etiquetas HTML para el pie de tabla",
         function () {
-            expect(Deportistas.plantillaTablaPersonasDatos.pie).toBe("</tbody></table>");
+            expect(Deportistas.tablaDeportistasDatos.pie).toBe("</tbody></table>");
         });
 });
 
@@ -77,7 +77,7 @@ describe("Deportistas.cuerpoConDeportistasTr ", function () {
     // Realizo los expect
     it("debería devolver una fila de tabla con los datos de los deportistas",
         function () {
-            let msj = Deportistas.plantillaTablaPersonasDatos.cuerpo
+            let msj = Deportistas.tablaDeportistasDatos.cuerpo
             expect(msj.includes(d.ID)).toBeTrue();
             expect(msj.includes(d.EDAD)).toBeTrue();
             expect(msj.includes(d.SEXO)).toBeTrue();
@@ -92,7 +92,7 @@ describe("Deportistas.cuerpoConDeportistasTr ", function () {
 
     it("debería devolver una fila de tabla con los nombres e id de los deportistas",
         function () {
-            let msj = Deportistas.plantillaTablaPersonasNombres.cuerpo
+            let msj = Deportistas.tablaDeportistasNombres.cuerpo
             expect(msj.includes(d.ID)).toBeTrue();
             expect(msj.includes(d.NOMBRE)).toBeTrue();
         });
@@ -118,23 +118,27 @@ describe("Deportistas.imprimirDeportistas", function () {
         Deportistas.imprimeDatosMuchasPersonas(null);
         expect(contenido.innerHTML).toBe(Deportistas.DatosNulos);
     });
-    it('Debería mostrar una tabla dado un vector', function () {
+    it('Debería mostrar una tabla de datos dado un vector', function () {
         Deportistas.imprimeDatosMuchasPersonas([d1, d2]);
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaPersonasDatos) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaDeportistasDatos) >= 0).toBeTrue();
+    });
+    it('Debería mostrar una tabla de nombres dado un vector', function () {
+        Deportistas.imprimeNombreMuchasPersonas([d1, d2]);
+        expect(contenido.innerHTML.search(Deportistas.tablaDeportistasDatos) >= 0).toBeTrue();
     });
 });
 
 describe("Deportistas.formulario", function () {
     it('Debería contener una fila con cada dato del deportista', function () {
         Deportistas.crear();
-        expect(contenido.innerHTML.search(Deportistas.plantillaFormularioPersona) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.formularioDeportista) >= 0).toBeTrue();
     });
 });
 
 describe("Deportistas.MostrarUnDeportista", function () {
     it('Debería contener una fila con cada dato del deportista', function () {
         Deportistas.imprimeUnaPersona(d1);
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaUnDeportista) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaUnDeportista) >= 0).toBeTrue();
     });
 });
 
@@ -142,18 +146,18 @@ describe("Deportistas.Modifica", function () {
     it('Debería contener una fila con el deportista seleccionado pudiendo modificar el nombre', function () {
         Deportistas.imprimeUnaPersona(d1);
         Deportistas.modificar()
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaUnDeportista) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaUnDeportista) >= 0).toBeTrue();
     });
 });
 
 describe("Deportistas.ImprimeUnaPersona", function () {
     it('Debería contener una fila con el deportista seleccionado', function () {
         Deportistas.imprimeUnaPersona(d1);
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaUnDeportista) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaUnDeportista) >= 0).toBeTrue();
     });
     it('Debería mostrar un mensaje de error al indicar un deportista erróneo', function () {
         Deportistas.imprimeUnaPersona(null);
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaUnDeportista) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaUnDeportista) >= 0).toBeTrue();
     });
 });
 
@@ -163,14 +167,14 @@ describe("Deportistas.filtrarNombre", function () {
         Deportistas.almacenaVector([d1,d2])
         document.getElementById("filter-nombre").value = "nombrePrueba1";
         Deportistas.filtraNombreD()
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaPersonasDatos) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaDeportistasDatos) >= 0).toBeTrue();
     });
     it('Debería obtener una tabla con el elemento nombrePrueba2', function () {
         Deportistas.imprimeDatosMuchasPersonas([d1,d2])
         Deportistas.almacenaVector([d1,d2])
         document.getElementById("filter-nombre").value ="nombrePrueba2";
         Deportistas.filtraNombreD()
-        expect(contenido.innerHTML.search(Deportistas.plantillaTablaPersonasDatos) >= 0).toBeTrue();
+        expect(contenido.innerHTML.search(Deportistas.tablaDeportistasDatos) >= 0).toBeTrue();
     });
     it('Debería obtener un mensaje indicando que no cumple ningún criterio', function () {
         Deportistas.imprimeDatosMuchasPersonas([d1,d2])
@@ -178,6 +182,31 @@ describe("Deportistas.filtrarNombre", function () {
         document.getElementById("filter-nombre").value = "Jose";
         Deportistas.filtraNombreD()
         expect(contenido.innerHTML.search(Deportistas.DatosNoEncontrado) >= 0).toBeTrue();
+    });
+});
+
+describe("Deportistas.OrdenarAlfabéticamente", function () {
+    it('Debería obtener una tabla con los datos de los deportistas ordenados', function () {
+        Deportistas.OrdenarDatos([d1,d2])
+        Deportistas.almacenaVector([d1,d2])
+        expect(contenido.innerHTML.search(Deportistas.tablaDeportistasDatos) >= 0).toBeTrue();
+    });
+    it('Debería obtener una tabla con los nombres de los deportistas ordenados', function () {
+        Deportistas.OrdenarNombres([d1,d2])
+        Deportistas.almacenaVector([d1,d2])
+        expect(contenido.innerHTML.search(Deportistas.tablaDeportistasNombres) >= 0).toBeTrue();
+    });
+});
+
+describe("Deportistas.AlmacenaObjetos", function () {
+    it('Debería guardar el deportista', function () {
+        Deportistas.almacenaDatos(d1);
+        Deportistas.deportistaMostrado.ref['@ref'].id == d1.ref['@ref'].id
+    });
+    it('Debería guardar el vector', function () {
+        Deportistas.almacenaVector([d1,d2])
+        Deportistas.vectorDeportistas[0].ref['@ref'].id == d1.ref['@ref'].id
+        Deportistas.vectorDeportistas[1].ref['@ref'].id == d2.ref['@ref'].id
     });
 });
 
