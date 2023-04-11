@@ -225,7 +225,31 @@ Décimo documento
   retirado: false
 }
 ```
-
+Además, se ha implementado un último deportista inventado para poder probar funcionalidades como actualizar datos, borrar deportista etc...
+```
+{
+    "nombre": "nombreCambiado",
+    "edad": 40,
+    "campeonatosMundo": "0",
+    "participacionesJJOO": [
+      "1990",
+      "1994"
+    ],
+    "nacionalidad": [
+      {
+        "pais": "España",
+        "ciudad": "Madrid"
+      }
+    ],
+    "altura": 1.94,
+    "sexo": "H",
+    "retirado": true,
+    "medallasOro": 0,
+    "medallasPlata": 0,
+    "medallasBronce": 1
+  }
+}
+```
 ### Primer incremento
 Para el primer incremento se han elegido las historias de usuario 1,2,4.
 
